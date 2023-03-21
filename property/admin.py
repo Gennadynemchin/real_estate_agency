@@ -4,6 +4,7 @@ from .models import Flat, Report
 
 @admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
+    raw_id_fields = ('liked_by',)
     search_fields = ('owner', 'town', 'address',)
     readonly_fields = ('created_at',)
     list_display = ('address', 'price', 'new_building', 'construction_year', 'town')
