@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('property', '0010_flat_owner_pure_phone'),
+        ("property", "0010_flat_owner_pure_phone"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='flat',
-            name='liked_by',
-            field=models.ManyToManyField(blank=True, null=True, related_name='liked_flats', to=settings.AUTH_USER_MODEL, verbose_name='Лайки'),
+            model_name="flat",
+            name="liked_by",
+            field=models.ManyToManyField(
+                blank=True,
+                null=True,
+                related_name="liked_flats",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Лайки",
+            ),
         ),
     ]
