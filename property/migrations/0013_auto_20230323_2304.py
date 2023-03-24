@@ -8,8 +8,9 @@ def set_pure_phonenumber(apps, schema_editor):
     Flat = apps.get_model("property", "Flat")
     for flat in Flat.objects.all():
         pure_phonenumber = phonenumbers.parse(flat.owners_phonenumber, 'RU')
-        flat.owner_pure_phone = pure_phonenumber
-        flat.save()
+        if phonenumbers.is_valid_number(pure_phonenumber):
+            flat.owner_pure_phone = pure_phonenumber
+            flat.save()
 
 
 class Migration(migrations.Migration):
