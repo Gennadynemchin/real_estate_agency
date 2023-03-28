@@ -78,3 +78,10 @@ class Owner(models.Model):
         blank=True,
     )
     flats = models.ManyToManyField(Flat, verbose_name='Квартиры в собственности', related_name='flat_owners', blank=True)
+
+"""
+for owner in Owner.objects.all():
+    apartments = Flat.objects.filter(owner=owner.owner)
+    owner.flats.set(apartments)
+    owner.save()
+"""
