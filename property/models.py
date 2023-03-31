@@ -69,19 +69,19 @@ class Report(models.Model):
 
 
 class Owner(models.Model):
-    owner = models.CharField("ФИО владельца", max_length=200)
-    owners_phonenumber = models.CharField("Номер владельца", max_length=20)
+    owner = models.CharField("ФИО владельца", max_length=200, db_index=True)
+    owners_phonenumber = models.CharField("Номер владельца", max_length=20, db_index=True)
     owner_pure_phone = PhoneNumberField(
         verbose_name="Нормализованный номер владельца",
         region="RU",
         null=True,
         blank=True,
+        db_index=True
     )
-    flats = models.ManyToManyField(Flat, verbose_name='Квартиры в собственности', related_name='flat_owners', blank=True)
-
-"""
-for owner in Owner.objects.all():
-    apartments = Flat.objects.filter(owner=owner.owner)
-    owner.flats.set(apartments)
-    owner.save()
-"""
+    flats = models.ManyToManyField(
+        Flat,
+        verbose_name='Квартиры в собственности',
+        related_name='flat_owners',
+        blank=True,
+        db_index=True
+    )

@@ -16,7 +16,7 @@ def set_pure_phonenumber(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0012_auto_20230321_2318'),
+        ('property', '0011_auto_20230321_2318'),
     ]
 
     operations = [
