@@ -6,6 +6,8 @@ from django.db import migrations
 def set_owners(apps, schema_editor):
     Flat = apps.get_model("property", "Flat")
     Owner = apps.get_model("property", "Owner")
+
+    '''    
     for owner in Flat.objects.all():
         owner_name = owner.owner
         phonenumber = owner.owners_phonenumber
@@ -13,6 +15,19 @@ def set_owners(apps, schema_editor):
         Owner.objects.get_or_create(owner=owner_name,
                                     owners_phonenumber=phonenumber,
                                     owner_pure_phone=pure_phonenumber)
+    '''
+
+    flat_set = Flat.objects.all()
+    if flat_set.exists():
+        for owner in flat_set.iterator():
+            owner_name = owner.owner
+            phonenumber = owner.owners_phonenumber
+            pure_phonenumber = owner.owner_pure_phone
+            Owner.objects.get_or_create(owner=owner_name,
+                                        owners_phonenumber=phonenumber,
+                                        owner_pure_phone=pure_phonenumber)
+
+
 
 
 class Migration(migrations.Migration):
