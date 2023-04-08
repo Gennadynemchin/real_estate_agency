@@ -5,14 +5,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
-    owner = models.CharField("ФИО владельца", max_length=200)
-    owners_phonenumber = models.CharField("Номер владельца", max_length=20)
-    owner_pure_phone = PhoneNumberField(
-        verbose_name="Нормализованный номер владельца",
-        region="RU",
-        null=True,
-        blank=True,
-    )
     created_at = models.DateTimeField(
         "Когда создано объявление", default=timezone.now, db_index=True
     )
@@ -61,7 +53,7 @@ class Report(models.Model):
     author = models.ForeignKey(
         User, verbose_name="Автор жалобы", on_delete=models.CASCADE
     )
-    flat = models.ForeignKey(Flat, verbose_name="Объект", on_delete=models.CASCADE)
+    flat = models.ForeignKey(Flat, verbose_name="Объект", related_name="reports", on_delete=models.CASCADE)
     text = models.TextField("Текст жалобы")
 
     def __str__(self):
@@ -81,7 +73,10 @@ class Owner(models.Model):
     flats = models.ManyToManyField(
         Flat,
         verbose_name='Квартиры в собственности',
-        related_name='flat_owners',
+        related_name='owners',
         blank=True,
         db_index=True
     )
+
+    def __str__(self):
+        return f"{self.owner}"

@@ -11,7 +11,6 @@ class FlatInline(admin.TabularInline):
 class FlatAdmin(admin.ModelAdmin):
     raw_id_fields = ("liked_by",)
     search_fields = (
-        "owner",
         "town",
         "address",
     )
@@ -22,12 +21,14 @@ class FlatAdmin(admin.ModelAdmin):
         "new_building",
         "construction_year",
         "town",
-        "owner_pure_phone",
     )
     list_editable = (
         "new_building",
     )
     list_filter = ("new_building",)
+    inlines = [
+        FlatInline,
+    ]
 
 
 @admin.register(Report)
