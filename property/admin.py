@@ -48,8 +48,8 @@ class OwnerAdmin(admin.ModelAdmin):
     )
     list_display = (
         "owner",
-        "owners_phonenumber",
-        "owner_pure_phone",
+        "phonenumber",
+        "pure_phone",
     )
 
     inlines = [
