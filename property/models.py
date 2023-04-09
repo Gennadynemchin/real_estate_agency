@@ -51,7 +51,7 @@ class Flat(models.Model):
 
 class Report(models.Model):
     author = models.ForeignKey(
-        User, verbose_name="Автор жалобы", on_delete=models.CASCADE
+        User, verbose_name="Автор жалобы", on_delete=models.CASCADE, related_name="reports"
     )
     flat = models.ForeignKey(Flat, verbose_name="Объект", related_name="reports", on_delete=models.CASCADE)
     text = models.TextField("Текст жалобы")
