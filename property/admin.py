@@ -4,7 +4,7 @@ from .models import Flat, Report, Owner
 
 class FlatInline(admin.TabularInline):
     model = Owner.flats.through
-    raw_id_fields = ("owner", "flat",)
+    raw_id_fields = ("name", "flat",)
 
 
 @admin.register(Flat)
@@ -44,10 +44,10 @@ class ReportAdmin(admin.ModelAdmin):
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ("flats",)
     search_fields = (
-        "owner",
+        "name",
     )
     list_display = (
-        "owner",
+        "name",
         "phonenumber",
         "pure_phone",
     )
